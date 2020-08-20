@@ -20,21 +20,22 @@ for(let i = 0; i < lengthArr; i++) {
 
 document.write(`Созданный массив: ${arr}<br>`);
 
-if (lengthArr %2 === 0) {
+if (lengthArr %2 === 0) {                 // or  delete this
   tmp = lengthArr;
 } else {
   tmp = lengthArr - 1;
 }
-//if (i + 1 === lengthArr) break;
 
-for (let i = 0; i < tmp; i += 2) {
+
+for (let i = 0; i < tmp; i += 2) {        // or   for (let i = 0; i < lengthArr; i += 2) { 
+                                          //        if (i + 1 === lengthArr) break;
   buf = arr[i];
   arr[i] = arr[i+1];
   arr[i+1] = buf;
 }
 
 document.write(`Итоговый массив: ${arr}<br>`);
-document.write("<br>------------------------------------------------------------------------------------------------------<br>");
+document.write("------------------------------------------------------------------------------------------------------<br>");
 
 //------------------------------------------------------------------------------------------------------
 alert("Task 2");
@@ -63,11 +64,9 @@ function table (myArr) {
   for (let i = 0; i < myArr.length; i++) {
     str += "<tr>";
     for (let j = 0; j < myArr[i].length; j++) {
-      str += "<td>";
+      str += "<td>";                                  // or  str += `<td>${myArr[i][j]}</td>`;
       str += myArr[i][j];
       str += "</td>";
-
-      //str += `<td>${myArr[i][j]}</td>`;
     }
     str += "</tr>";
   }
@@ -109,11 +108,13 @@ A[maxPosition-1] = buf2;
 
 document.write(`Измененный массив: ${table(A)}`);
 
-document.write("<br>------------------------------------------------------------------------------------------------------<br>");
+document.write("------------------------------------------------------------------------------------------------------<br>");
 
 //------------------------------------------------------------------------------------------------------
 
 let B = [];
+const rows = 10;
+const columns = 10;
 
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
@@ -121,40 +122,38 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min; //Включая мин и макс 
 }
 
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < rows; i++) {
   B[i] = [];
-  for (let j = 0; j < 10; j++) {
+  for (let j = 0; j < columns; j++) {
    B[i][j] = getRandomIntInclusive(-20, 20);
   }
 }
 
 document.write(`Созданный массив: ${table(B)}`);
 
+let res = [];
+let isNegativSumCol = [];
 let colPos = [];
 
-for (let j = 0; j < 10; j++) {
+for (let j = 0; j < columns; j++) {
   let sumCol = 0;
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < rows; i++) {
     sumCol += B[i][j];
   }
+  isNegativSumCol.push(sumCol < 0);
   if (sumCol < 0) {
     colPos.push(j+1);
   }
 }
 
-let res = [];
-
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < rows; i++) {
   res[i] = [];
-  for (let j = 0; j < 10; j++) {
-    if (!colPos.includes(j+1)) {
-      res[i].push(B[i][j]);
+  for (let j = 0; j < columns; j++) {        
+    if (!isNegativSumCol[j]) {              // or   if (!colPos.includes(j+1))
+      res[i].push(B[i][j]); 
     }
   }
-
 }
 
-document.write(`Колонки меньше нуля: ${colPos}<br>`);
-document.write(`Новый массив: ${table(res)}`)
-
-
+document.write(`Колонки меньше нуля: ${colPos} <br>`);
+document.write(`Новый массив: ${table(res)}`);
