@@ -1,7 +1,7 @@
 const input = document.querySelectorAll('input');
-const div = document.querySelector('div');
+const div = document.querySelectorAll('div');                     // (".container") && ("div[style]");
 
-document.body.addEventListener("change", function(event){
+div[0].addEventListener("change", function(event){
   let index;
   
   if (event.target === input[0]) {
@@ -15,7 +15,7 @@ document.body.addEventListener("change", function(event){
     index=0;
   }
   input[index].value = event.target.value;
-  div.style.backgroundSize = `40px ${event.target.value}px`;
+  div[1].style.backgroundSize = `40px ${event.target.value}px`;
 })
 
 //-----2 var-----//
@@ -37,9 +37,9 @@ document.body.addEventListener("change", function(event){
 
 // function changeGradient (arg) {
 //   if (arg < 50) {
-//     div.style.background=`linear-gradient(0, green ${arg}px, transparent ${arg}px)`;
+//     div[1].style.background=`linear-gradient(0, green ${arg}px, transparent ${arg}px)`;
 //   } else if (arg > 75 ) {
-//     div.style.background=`linear-gradient(0, green 50px, yellow 50px, yellow 75px, red 75px, red ${arg}px, transparent ${arg}px)`;
+//     div[1].style.background=`linear-gradient(0, green 50px, yellow 50px, yellow 75px, red 75px, red ${arg}px, transparent ${arg}px)`;
 //   } else
-//     div.style.background=`linear-gradient(0, green 50px, yellow 50px, yellow ${arg}px, transparent ${arg}px)`;
+//     div[1].style.background=`linear-gradient(0, green 50px, yellow 50px, yellow ${arg}px, transparent ${arg}px)`;
 // }
