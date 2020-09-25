@@ -1,0 +1,50 @@
+body{
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.carousel-inner{
+  background: lavender;
+  padding: 10px 15% 134px;
+}
+
+.carousel-item{
+  display: none;
+  width: 655px;
+  margin: 0 auto;
+} 
+
+.carousel h2{
+  color: #244C8E;
+  font-size: 25px;
+  width: 255px;
+  margin: 15px auto;
+  padding-bottom: 5px;
+}
+
+.active{
+  display: block;
+}
+
+.carousel img{
+  width: 650px;
+}
+
+.carousel-next,
+.carousel-prev{
+  top: 50%;
+  position: absolute;
+  z-index: 1;
+  width: 10%;
+  transition: opacity .15s ease;
+}
+
+.carousel-next{
+  right: 0;
+  margin-right: 20px;
+}
+
+.carousel-prev{
+  left: 0;
+  margin-left: 20px;
+}
