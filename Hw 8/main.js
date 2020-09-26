@@ -41,11 +41,9 @@ class Field {
     document.write(`newY size= ${this.height}`);
     this.matrix = this.createMatrix();
   }
-
   addPerson(x,y) {          // [10-10] - chyvak 100.0 nizzzya
     this.matrix[x][y] = 1;
   }
-
   movePerson(x,y) {
     this.matrix[x][y] = 1;
   }
@@ -64,21 +62,21 @@ class Person {
   }
   go(direction, step) {    //'left', 'right', 'top', 'bottom') и с шагом step
 
-    if (this.direction === "left") {
-      this.XPosition - step
+    if (direction === "left") {
+      this.stepGox = this.XPosition - step;
     } else if (this.direction === "right") {
-      this.XPosition + step
+      this.stepGox = this.XPosition + step;
     } else if (this.direction === "top") {
-      this.YPosition - step
+      this.stepGoy = this.YPosition - step;
     } else if (this.direction === "bottom") {
-      this.YPosition + step
+      this.stepGoy = this.YPosition + step;
     }
 
-    movePerson
+    field.movePerson(this.stepGox, this.stepGoy);
   }
-  resetPosition() {
+  // resetPosition() {
     
-  }
+  // }
 }
 
 let person = new Person("Jane", 5, 0);
@@ -86,4 +84,6 @@ let field = new Field(10,10);
 
 field.renderField();
 person.start(field);
+field.renderField();
+person.go("right", 2);
 field.renderField();
