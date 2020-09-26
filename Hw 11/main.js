@@ -5,12 +5,17 @@ let slides = document.querySelectorAll(".carousel-item");
 
 
 carousel.addEventListener("click", function(event){
-  let k;
-  for (let i = 0; i < slides.length; i++) {
-    if(slides[i].classList.contains("active")) {
-      k = i;    
-    }
-  }
+  // let k;
+  // for (let i = 0; i < slides.length; i++) {
+  //   if(slides[i].classList.contains("active")) {
+  //     k = i;    
+  //   }
+  // }
+  
+
+  // let k = [...slides].findIndex((el) => el.classList.contains("active"));
+  let k = Array.prototype.findIndex.call(slides, el => el.classList.contains("active"));
+  console.log(k);
 
   if (event.target === btn_n) {
     slides[k].classList.remove("active");
