@@ -1,0 +1,26 @@
+table {
+  text-align: center;
+}
+
+th {
+  width: 70px;
+  background: lavender;
+}
+
+th:last-of-type {
+  width: 150px;
+}
+
+form {
+  margin: 30px;
+}
+
+input, 
+textarea{
+  margin: 5px;
+  display: block;
+}
+
+input[type="checkbox"]{
+  display: inline-block;
+}
