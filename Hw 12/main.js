@@ -17,7 +17,9 @@ let tbody = document.querySelector("tbody");
 let form = document.querySelector("form");
 
 function createTable(arr){
-   for (let i = 0; i < arr.length; i++) {
+  tbody.innerHTML = "";
+
+  for (let i = 0; i < arr.length; i++) {
     let tr = document.createElement("tr");
     tbody.appendChild(tr);
     for (let j = 0; j < keys.length; j++){
@@ -46,37 +48,33 @@ createTable(arr);
 
 function showText(id){
   form.style.display = "block";
-  console.log(id);
   for (let i = 0; i < keys.length; i++) {
-    console.log(form.elements[i]);
-    console.log(id[keys[i+1]]);
     form.elements[i].value = id[keys[i+1]];
-    if (i === 5) {
-      console.log(id[keys[i]]);
-      id[keys[i]].forEach(function(item) {
-        if (item === "js") {
-          form.elements.js.checked = true;
-        }
-        if (item === "python"){
-          form.elements.python.checked = true;
-        }
-        if (item === "php"){
-          form.elements.php.checked = true;
-        }
-      })
+    if (i === 5) {      
+      if (id[keys[i]].includes("js")) {
+        form.elements.js.checked = true;
+      } else if (!id[keys[i]].includes("js")){
+        form.elements.js.checked = false;
+      }
+      if (id[keys[i]].includes("python")){
+        form.elements.python.checked = true;
+      } else if (!id[keys[i]].includes("python")){
+        form.elements.python.checked = false;
+      }
+      if (id[keys[i]].includes("php")){
+        form.elements.php.checked = true;
+      }else if (!id[keys[i]].includes("php")){
+        form.elements.php.checked = false;
+      }
     }
   }
 }
 
+
 function removePerson(id){
   // agree or disagree
-  console.log("removePerson");
-  console.log(id);
-  let n;
-  console.log(id[keys[0]]);
-  n = id[keys[0]];
-  console.log(n);
-  arr[n-1] = {};
+  let n = id[keys[0]];
+  arr.splice(n-1, 1);
   console.log(arr);
 
   createTable(arr);
@@ -84,7 +82,6 @@ function removePerson(id){
 
 function editText(id){
   showText(id);
-  console.log("editText");
   let submit = document.querySelector("input[type=submit]")
   submit.style.display = "block";
   submit.addEventListener("click", addText);
@@ -104,10 +101,3 @@ create.addEventListener("click", addText);
 function addText(){
   console.log("addText");
 }
-
-// function addButton(namebtn){
-//   namebtn = document.createElement("button");
-//   namebtn.innerHTML = "Edit";
-//   namebtn.addEventListener("click", function () {
-//   namebtn+Do(arr[i].id) });
-// }
