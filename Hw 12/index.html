@@ -20,10 +20,11 @@
      <th>Actions</th>
     </thead>
     <tbody>
+
     </tbody>
   </table>
 
-  <form action="">
+  <form action="" style="display: none;">
     <label for="name">Name
       <input type="text" name="name" id="name">
     </label>
@@ -36,12 +37,14 @@
     <label for="address">Address
       <textarea name="address" id="" cols="20" rows="1"></textarea>
     </label>
-    <label for="js"><input type="checkbox" name="js">JS</label>
-    <label for="python"><input type="checkbox" name="python">Python</label>
-    <label for="php"><input type="checkbox" name="php">Php</label>
+    <label for="js"><input type="checkbox" name="skills" value="js" id="js">JS</label>
+    <label for="python"><input type="checkbox" name="skills" value="python" id="python">Python</label>
+    <label for="php"><input type="checkbox" name="skills" value="php" id="php">Php</label>
     
+    <input type="submit" style="display: none;">
   </form>
 
+  <button class="add">New</button>
   <script src="main.js"></script>
 </body>
 </html>

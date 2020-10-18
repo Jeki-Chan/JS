@@ -14,6 +14,7 @@ let arr = [
 
 let keys = ["id", "name", "surname", "age", "address", "skills"];
 let tbody = document.querySelector("tbody");
+let form = document.querySelector("form");
 
 function createTable(arr){
    for (let i = 0; i < arr.length; i++) {
@@ -26,15 +27,15 @@ function createTable(arr){
     }
     let td = document.createElement("td");
     tr.appendChild(td);
-    let edit = document.createElement("button");
-    edit.innerHTML = "Edit";
-    edit.addEventListener("click", editDo);
     let view = document.createElement("button");
     view.innerHTML = "View";
-    view.addEventListener("click", viewDo);
+    view.addEventListener("click", () => showText(arr[i]));   // function () { showText(arr[i].id) });
+    let edit = document.createElement("button");
+    edit.innerHTML = "Edit";
+    edit.addEventListener("click", () => editText(arr[i]));
     let remove = document.createElement("button");
     remove.innerHTML = "Remove";
-    remove.addEventListener("click", removeDo);
+    remove.addEventListener("click", () => removePerson(arr[i]));
     td.appendChild(edit);
     td.appendChild(view);
     td.appendChild(remove);
@@ -43,46 +44,70 @@ function createTable(arr){
 
 createTable(arr);
 
-let name = document.getElementsByName("name");
-
-function viewDo(event){
-  console.log("viewDo");
-//  event.preventDefault();
-  //document.write("viewDo");
-
+function showText(id){
+  form.style.display = "block";
+  console.log(id);
+  for (let i = 0; i < keys.length; i++) {
+    console.log(form.elements[i]);
+    console.log(id[keys[i+1]]);
+    form.elements[i].value = id[keys[i+1]];
+    if (i === 5) {
+      console.log(id[keys[i]]);
+      id[keys[i]].forEach(function(item) {
+        if (item === "js") {
+          form.elements.js.checked = true;
+        }
+        if (item === "python"){
+          form.elements.python.checked = true;
+        }
+        if (item === "php"){
+          form.elements.php.checked = true;
+        }
+      })
+    }
+  }
 }
 
-//edit.addEventListener("click", editDo);
-//remove.addEventListener("click", removeDo);
-//create.addEventListener("click", createDo);
+function removePerson(id){
+  // agree or disagree
+  console.log("removePerson");
+  console.log(id);
+  let n;
+  console.log(id[keys[0]]);
+  n = id[keys[0]];
+  console.log(n);
+  arr[n-1] = {};
+  console.log(arr);
 
-function createDo(event){
-  console.log("createDo");
-//  event.preventDefault();
-  //document.write("createDo");
+  createTable(arr);
 }
-function editDo(event){
-  //event.preventDefault();
-  console.log("editDo");
-  //document.write("editDo");
-}
-function removeDo(event){
-  console.log("removeDo");
- // event.preventDefault();
-  //document.write("removeDo");
-}
-// let edit = document.querySelector("edit");
-// let remove = document.querySelector("remove");
-// let view = document.querySelector("view");
-// let create = document.querySelector("create");
 
-// let table = document.querySelector("table");
-// let tr = document.querySelector("tr");    //All   push sled
-// let td = document.querySelector("td");
+function editText(id){
+  showText(id);
+  console.log("editText");
+  let submit = document.querySelector("input[type=submit]")
+  submit.style.display = "block";
+  submit.addEventListener("click", addText);
+  // let data = {}
+  // for (let i = 0; i < form.elements.length; i++) {
+  //   let element = form.elements[0];
+  //   let name = element.name;
+  //   let value = element.value;
+  //   data[name] = value;
+    
+  // }
+}
 
-// let password = document.getElementsByName("password");
-// let age = document.getElementsByName("age");
-// let address = document.getElementsByName("address");
-// let js = document.getElementsByName("js");
-// let python = document.getElementsByName("python");
-// let php = document.getElementsByName("php");
+let create = document.querySelector(".add");
+create.addEventListener("click", addText);
+
+function addText(){
+  console.log("addText");
+}
+
+// function addButton(namebtn){
+//   namebtn = document.createElement("button");
+//   namebtn.innerHTML = "Edit";
+//   namebtn.addEventListener("click", function () {
+//   namebtn+Do(arr[i].id) });
+// }
