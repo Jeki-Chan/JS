@@ -1,9 +1,6 @@
 let createCount = () => {     //let count = 0;   count++;
   let i = 0;
-  return () => i++;
-  // return () => {
-  //   return i++;
-  // }   
+  return () => i++; 
 }
 
 let createId = createCount();
@@ -19,17 +16,17 @@ submit.addEventListener("click", () => savePerson(buffObj));
 create.addEventListener("click", onNewClick);
 newsubmit.addEventListener("click", createPerson);
 
-function createTbody(persons){
+function createTbody(users){
   tbody.innerHTML = "";
   create.style.display = "block";
 
-  for (let i = 0; i < persons.length; i++) {
+  for (let i = 0; i < users.length; i++) {
     let tr = document.createElement("tr");
     tbody.appendChild(tr);
     for (let j = 0; j < keys.length; j++){
       let td = document.createElement("td");
       tr.appendChild(td);
-      td.innerHTML = persons[i][keys[j]];        
+      td.innerHTML = users[i][keys[j]];        
     }
     let td = document.createElement("td");
     td.classList.add("actions");
@@ -37,15 +34,15 @@ function createTbody(persons){
 
     let view = document.createElement("button");
     view.innerHTML = "View";
-    view.addEventListener("click", () => fillForm(persons[i]));  
+    view.addEventListener("click", () => fillForm(users[i]));  
 
     let edit = document.createElement("button");
     edit.innerHTML = "Edit";
-    edit.addEventListener("click", () => onEditClick(persons[i]));
+    edit.addEventListener("click", () => onEditClick(users[i]));
 
     let remove = document.createElement("button");
     remove.innerHTML = "Remove";
-    remove.addEventListener("click", () => removePerson(persons[i]));
+    remove.addEventListener("click", () => removePerson(users[i]));
 
     td.appendChild(edit);
     td.appendChild(view);
@@ -63,22 +60,6 @@ function fillForm(pers){
       form.elements.js.checked = pers[keys[i+1]].includes("js");
       form.elements.python.checked = pers[keys[i+1]].includes("python");
       form.elements.php.checked = pers[keys[i+1]].includes("php");
-
-      // if (pers[keys[i+1]].includes("js")) {
-      //   form.elements.js.checked = true;
-      // } else if (!pers[keys[i+1]].includes("js")){
-      //   form.elements.js.checked = false;
-      // }
-      // if (pers[keys[i+1]].includes("python")){
-      //   form.elements.python.checked = true;
-      // } else if (!pers[keys[i+1]].includes("python")){
-      //   form.elements.python.checked = false;
-      // }
-      // if (pers[keys[i+1]].includes("php")){
-      //   form.elements.php.checked = true;
-      // } else if (!pers[keys[i+1]].includes("php")){
-      //   form.elements.php.checked = false;
-      // }
     } else {
       form.elements[i].value = pers[keys[i+1]];
     }
@@ -89,7 +70,7 @@ function removePerson(pers) {
   form.style.display = "none";
  
   let tdActions = document.querySelectorAll(".actions");
-  let index = persons.findIndex((element) => element === pers);         
+  let index = users.findIndex((element) => element === pers);         
   tdActions[index].innerHTML="Remove?";
   
   let yes = document.createElement("button");
@@ -98,20 +79,21 @@ function removePerson(pers) {
 
   let no = document.createElement("button");
   no.innerHTML = "No";
-  no.addEventListener("click", () => createTbody(persons));  
+  no.addEventListener("click", () => createTbody(users));  
 
   tdActions[index].appendChild(yes);
   tdActions[index].appendChild(no);
 }
 
 function removeYes(index) {
-  persons.splice(index, 1); 
-  createTbody(persons);
+  users.splice(index, 1); 
+  createTbody(users);
 }
 
 function onEditClick(pers){
   fillForm(pers);
   buffObj = pers;
+
   submit.style.display = "block";
   newsubmit.style.display = "none";
 } 
@@ -125,21 +107,16 @@ function savePerson(pers) {
     pers[keys[j]] = res[keys[j]];
   }
 
-  createTbody(persons);
+  createTbody(users);
 }
 
 function createFromForm() {
-  let obj = {
-    id: "",
-    skills: [],
-  };
-  // obj.id= "";
-  // obj.skills = [];
+  let obj = {};
+  obj.id= "";
+  obj.skills = [];
   for (let j = 0; j < form.elements.length; j++) {
     let element = form.elements[j];
     let { name, value } = element;
-    // let name = element.name;
-    // let value = element.value;
     
     if (element.type === "checkbox") {
       if (element.checked) {
@@ -154,7 +131,6 @@ function createFromForm() {
 
 function onNewClick(){     
   form.reset();  
-
   form.style.display = "block";
   create.style.display = "none";
   submit.style.display = "none";
@@ -167,12 +143,12 @@ function createPerson() {
 
   let res = createFromForm();  
   res.id = createId();
-  persons.push(res);
+  users.push(res);
     
-  createTbody(persons);
+  createTbody(users);
 }
 
-let persons = [
+let users = [
   {
     id: createId(), 
     name: "Oleg", 
@@ -191,4 +167,4 @@ let persons = [
   }
 ];
 
-createTbody(persons);
+createTbody(users);
