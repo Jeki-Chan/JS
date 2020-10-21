@@ -1,4 +1,3 @@
-
 let createCount = () => {     //let count = 0;   count++;
   let i = 0;
   return () => {
@@ -6,42 +5,43 @@ let createCount = () => {     //let count = 0;   count++;
   }
 }
 
-let createId = createCount();
 let buffObj;
+let createId = createCount();
 let keys = ["id", "name", "surname", "age", "address", "skills"];
 let tbody = document.querySelector("tbody");
 let form = document.querySelector("form");
 let submit = document.querySelector(".submit");
 let create = document.querySelector(".add");
 let newsubmit = document.querySelector(".newsubmit");
+
 submit.addEventListener("click", () => savePerson(buffObj)); 
 create.addEventListener("click", onNewClick);
 newsubmit.addEventListener("click", () => createPerson(event));
 
-function createTbody(arr){
+function createTbody(persons){
   tbody.innerHTML = "";
   create.style.display = "block";
 
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < persons.length; i++) {
     let tr = document.createElement("tr");
     tbody.appendChild(tr);
     for (let j = 0; j < keys.length; j++){
       let td = document.createElement("td");
       tr.appendChild(td);
-      td.innerHTML = arr[i][keys[j]];        
+      td.innerHTML = persons[i][keys[j]];        
     }
     let td = document.createElement("td");
     td.classList.add("actions");
     tr.appendChild(td);
     let view = document.createElement("button");
     view.innerHTML = "View";
-    view.addEventListener("click", () => fillForm(arr[i]));  
+    view.addEventListener("click", () => fillForm(persons[i]));  
     let edit = document.createElement("button");
     edit.innerHTML = "Edit";
-    edit.addEventListener("click", () => onEditClick(arr[i]));
+    edit.addEventListener("click", () => onEditClick(persons[i]));
     let remove = document.createElement("button");
     remove.innerHTML = "Remove";
-    remove.addEventListener("click", () => removePerson(arr[i]));
+    remove.addEventListener("click", () => removePerson(persons[i]));
     td.appendChild(edit);
     td.appendChild(view);
     td.appendChild(remove);
@@ -51,6 +51,7 @@ function createTbody(arr){
 function fillForm(pers){   
   form.style.display = "block";
   submit.style.display = "none";
+  newsubmit.style.display = "none";
 
   for (let i = 0; i < keys.length; i++) {
     form.elements[i].value = pers[keys[i+1]];
@@ -79,7 +80,7 @@ function removePerson(pers) {
   submit.style.display = "none";
  
   let tdActions = document.querySelectorAll(".actions");
-  let index = arr.findIndex((element) => element === pers);           //const index = (element) => element === pers; arr.findIndex(index);
+  let index = persons.findIndex((element) => element === pers);           //const index = (element) => element === pers; arr.findIndex(index);
   tdActions[index].innerHTML="Remove?";
   
   let yes = document.createElement("button");
@@ -87,20 +88,21 @@ function removePerson(pers) {
   yes.addEventListener("click", () => removeYes(index));  
   let no = document.createElement("button");
   no.innerHTML = "No";
-  no.addEventListener("click", () => createTbody(arr));  
+  no.addEventListener("click", () => createTbody(persons));  
   tdActions[index].appendChild(yes);
   tdActions[index].appendChild(no);
 }
 
 function removeYes(index) {
-  arr.splice(index, 1); 
-  localStorage.setItem('test', JSON.stringify(arr));
-  createTbody(arr);
+  persons.splice(index, 1); 
+  localStorage.setItem('test', JSON.stringify(persons));
+  createTbody(persons);
 }
 
 function onEditClick(pers){
   fillForm(pers);
   buffObj = pers;
+  newsubmit.style.display = "none";
 
   submit.style.display = "block";
 } 
@@ -113,9 +115,9 @@ function savePerson(pers) {
   for (let j = 1; j < keys.length; j++) {
     pers[keys[j]] = res[keys[j]];
   }
-  localStorage.setItem('test', JSON.stringify(arr));
+  localStorage.setItem('test', JSON.stringify(persons));
 
-  createTbody(arr);
+  createTbody(persons);
 }
 
 function createFromForm() {
@@ -146,37 +148,23 @@ function onNewClick(){
 }
 
 function createPerson(event) {  
-  event.preventDefault();
+  form.style.display = "none";
 
+  event.preventDefault();
   let res = createFromForm();  
   res.id = createId();
-  arr.push(res);
-  localStorage.setItem('test', JSON.stringify(arr));
-    
-  createTbody(arr);
+  persons.push(res);
+
+  localStorage.setItem('test', JSON.stringify(persons));  
+  createTbody(persons);
 }
-
-let arr1 = [
-  {
-    id: createId(), 
-    name: "Oleg", 
-    surname: "Hi", 
-    age: 14, 
-    address: "Oslo", 
-    skills: ["js", "python"]
-  },
-  {
-    id: createId(), name: "Mike", surname: "Ivanov", age: 34, address: "Miami", skills: ["php", "python"]
-  }
-];
-
 
 
 let tmp = localStorage.getItem('test');
-let arr = [];
+let persons = [];
 
 if (!tmp) {
-  arr[0] = {
+  persons[0] = {
   id: createId(), 
   name: "Oleg", 
   surname: "Hi", 
@@ -185,8 +173,8 @@ if (!tmp) {
   skills: ["js", "python"]
   };
 } else {
-  arr = JSON.parse(tmp);
+  persons = JSON.parse(tmp);
 }
-createTbody(arr);
+createTbody(persons);
 
-localStorage.setItem('test', JSON.stringify(arr));
+localStorage.setItem('test', JSON.stringify(persons));
