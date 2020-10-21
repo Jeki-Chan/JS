@@ -1,4 +1,3 @@
-let arr = JSON.parse(localStorage.getItem('test') || '[]');
 
 let createCount = () => {     //let count = 0;   count++;
   let i = 0;
@@ -94,7 +93,7 @@ function removePerson(pers) {
 }
 
 function removeYes(index) {
-  arr.splice(index, 1);
+  arr.splice(index, 1); 
   localStorage.setItem('test', JSON.stringify(arr));
   createTbody(arr);
 }
@@ -115,6 +114,7 @@ function savePerson(pers) {
     pers[keys[j]] = res[keys[j]];
   }
   localStorage.setItem('test', JSON.stringify(arr));
+
   createTbody(arr);
 }
 
@@ -151,9 +151,42 @@ function createPerson(event) {
   let res = createFromForm();  
   res.id = createId();
   arr.push(res);
-  
   localStorage.setItem('test', JSON.stringify(arr));
+    
   createTbody(arr);
 }
 
+let arr1 = [
+  {
+    id: createId(), 
+    name: "Oleg", 
+    surname: "Hi", 
+    age: 14, 
+    address: "Oslo", 
+    skills: ["js", "python"]
+  },
+  {
+    id: createId(), name: "Mike", surname: "Ivanov", age: 34, address: "Miami", skills: ["php", "python"]
+  }
+];
+
+
+
+let tmp = localStorage.getItem('test');
+let arr = [];
+
+if (!tmp) {
+  arr[0] = {
+  id: createId(), 
+  name: "Oleg", 
+  surname: "Hi", 
+  age: 14, 
+  address: "Oslo", 
+  skills: ["js", "python"]
+  };
+} else {
+  arr = JSON.parse(tmp);
+}
 createTbody(arr);
+
+localStorage.setItem('test', JSON.stringify(arr));
