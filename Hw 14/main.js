@@ -3,7 +3,7 @@ let hours = document.querySelector(".hours");
 let minutes = document.querySelector(".minutes");
 let seconds = document.querySelector(".seconds");
 
-function time0 () {  
+function incTime () { 
   second++;
 
   if (second === 59) {
@@ -27,7 +27,7 @@ function time0 () {
   seconds.innerHTML = `${second}`;
 }
 
-setInterval(time0,200);
+setInterval(incTime, 1000);
 
 //---------
 
@@ -45,13 +45,13 @@ let m2 = 8;
 let s1 = 5;
 let s2 = 8;
 
-function findImg (block, numb) {
+function setImg (block, numb) {
   block.style.backgroundImage = `url('img/numb/${numb}.png')`;
 }
 
-setInterval(timeRun, 200);
+setInterval(incTime2, 200);
 
-function timeRun () {
+function incTime2 () {
   s2++;
   if (s2 === 10) {
     s2 = 0;
@@ -79,12 +79,12 @@ function timeRun () {
       h2 = 0;
     }
   }
-  findImg(hr1, h1);
-  findImg(hr2, h2);
-  findImg(min1, m1);
-  findImg(min2, m2);
-  findImg(sec1, s1);
-  findImg(sec2, s2);
+  setImg(hr1, h1);
+  setImg(hr2, h2);
+  setImg(min1, m1);
+  setImg(min2, m2);
+  setImg(sec1, s1);
+  setImg(sec2, s2);
 }
 
 //---------
@@ -94,11 +94,11 @@ let btnNext = document.querySelector(".carousel-next");
 let slides = document.querySelectorAll(".carousel-item"); 
 
 let k=0;
-let time = Timeeeeer();
+let time = setInterval(NextSlide, 3000)
 
 btnPrev.addEventListener("click", function() {
   clearTimeout(time);
-  time = Timeeeeer();
+  time = setInterval(NextSlide, 3000)
   if (k === 0) {
     slides[k].classList.remove("active");
     k = 4;
@@ -113,7 +113,7 @@ btnPrev.addEventListener("click", function() {
 
 btnNext.addEventListener("click", function(){
   clearTimeout(time);
-  time = Timeeeeer();
+  time = setInterval(NextSlide, 3000)
   NextSlide();
 })
 
@@ -127,9 +127,4 @@ function NextSlide() {
     k++;
     slides[k].classList.add("active");
   }
-}
-
-function Timeeeeer() {
-  let timer = setInterval(NextSlide, 3000);
-  return timer;
 }
