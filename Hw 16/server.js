@@ -2,7 +2,6 @@ const express = require('express');
 const { nanoid } = require('nanoid');
 const bodyParser = require('body-parser');
 
-
 let arr = [
   {   
   id: nanoid(), 
@@ -50,7 +49,7 @@ app.post('/api/arr', (req, res) => {
   }
 });
 
-// Rename. PUT
+// Edit. PUT
 
 app.put('/api/arr/:id', (req, res) => {
   let index = arr.findIndex((element) => element.id === req.params.id);     
