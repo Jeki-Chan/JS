@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+}
+
+.container {
+  width: 450px;
+  min-height: 500px;
+  margin: 0 auto;
+  border: 1px solid;
+  background: lavender;
+  padding: 15px 35px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item{
+  border: 1px solid darkblue;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  background: ghostwhite;
+}
+
+.item_status, 
+.item_priority{
+  padding: 5px;
+  border: 1px solid;
+  border-radius: 5px;
+  margin-right: 5px;
+  font-size: 12px;
+}
+
+form{
+  margin: 20px;
+}
+
+.btnEdit {
+  display: none;
+}
