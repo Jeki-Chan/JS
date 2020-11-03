@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel=stylesheet id=fontawesome-css href='https://use.fontawesome.com/releases/v5.6.3/css/all.css' media=all />
+  <link rel="stylesheet" href="style.css">
+
+  <title>Homework 15</title>
+</head>
+<body>
+  <div class="container">
+    <div class="header">    
+      <h1>ToDo list:</h1>
+    </div>
+    <main>
+      
+    </main>
+
+    <form class="add">
+      <input type="text" placeholder="Name" name="title">
+      <input type="text" placeholder="Task" name="text">
+      <select name="status" id="status">
+        <option value="Open" selected>Open</option>
+        <option value="In progres">In progress</option>
+        <option value="Done">Done</option>
+      </select>
+
+      <select name="priority" id="priority">
+        <option value="Low">Low</option>
+        <option value="Minor">Minor</option>
+        <option value="Major">Major</option>
+        <option value="High">High</option>
+      </select>
+
+      <button class="btnAdd" data-action="btnAdd">Add</button>
+      <button class="btnEdit" data-action="btnEdit">Edit</button>
+    </form>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
